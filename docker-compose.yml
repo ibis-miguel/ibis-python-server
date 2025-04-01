@@ -7,16 +7,18 @@ services:
     volumes:
       - ./data:/app/data
     environment:
-      - FLASK_APP=${FLASK_APP}  
-      - FLASK_RUN_HOST=${FLASK_RUN_HOST} 
-      - DATABASE_URL=${DATABASE_URI}
-      - FLASK_ENV=${FLASK_ENV}
+      - FLASK_APP=app.py  
+      - FLASK_RUN_HOST=0.0.0.0 
+      - DATABASE_URL=sqlite:///quickquid.db
+      - FLASK_ENV=production
     networks:
       - mynetworkpy
 
   frontend:
     build:
       context: ../ibis-poc-frontend
+      args:
+        - ENV= production
       dockerfile: Dockerfile
     container_name: angular-frontend-python
     ports:
