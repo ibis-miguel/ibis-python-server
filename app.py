@@ -7,11 +7,11 @@ from sqlalchemy.orm import joinedload
 from flask_cors import CORS
 from dotenv import load_dotenv
 
-env = os.getenv('FLASK_ENV', 'dev')
+env = os.getenv('FLASK_ENV', 'development')
 load_dotenv(f'config/.env.{env}') 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URI')  
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///quickquid.db'  
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
 db = SQLAlchemy(app)
 
