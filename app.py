@@ -16,6 +16,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 print(f"Running in {os.getenv('FLASK_ENV')} mode")
+print(os.getenv('ORIGINS'))
 
 origins = os.getenv('ORIGINS', 'http://localhost:4200').split(',')
 
