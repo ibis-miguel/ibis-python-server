@@ -1,17 +1,26 @@
+import os
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Enum, DateTime
 from datetime import datetime
 from sqlalchemy.orm import joinedload
 from flask_cors import CORS
+from dotenv import load_dotenv
+
+env = os.getenv('FLASK_ENV', 'dev')
+load_dotenv(f'config/.env.{env}') 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///quickquid.db'  
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URI')  
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
 db = SQLAlchemy(app)
 
+print(f"Running in {os.getenv('FLASK_ENV')} mode")
+
+origins = os.getenv('ORIGINS', 'http://localhost:4200').split(',')
+
 CORS(app, 
-     origins=["http://localhost:4200"], 
+     origins=origins, 
      methods=["GET", "POST", "PUT", "DELETE"], 
      allow_headers=["Content-Type", "Authorization"],
      supports_credentials=True)
@@ -327,8 +336,8 @@ def get_transactions_by_account():
         return jsonify({"message": "Error retrieving transactions"}), 500
 
 with app.app_context():
-    # db.drop_all()
+    db.drop_all()
     db.create_all()
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8080)
+    app.run(debug=os.getenv('DEBUG'), port=8080)

@@ -1,15 +1,35 @@
 services:
-  web:
-    build: .
+  app:
+    build:
+      context: .
     ports:
       - "8080:8080"
     volumes:
-      - .:/app
+      - ./data:/app/data
     environment:
-      - FLASK_ENV=development
+      - FLASK_APP=${FLASK_APP}  
+      - FLASK_RUN_HOST=${FLASK_RUN_HOST} 
+      - DATABASE_URL=${DATABASE_URI}
+      - FLASK_ENV=${FLASK_ENV}
     networks:
-      - flask-network
+      - mynetworkpy
+
+  frontend:
+    build:
+      context: ../ibis-poc-frontend
+      dockerfile: Dockerfile
+    container_name: angular-frontend-python
+    ports:
+      - "4200:80"
+    depends_on:
+      - app
+    networks:
+      - mynetworkpy
 
 networks:
-  flask-network:
+  mynetworkpy:
     driver: bridge
+
+volumes:
+  db_data:
+    driver: local
