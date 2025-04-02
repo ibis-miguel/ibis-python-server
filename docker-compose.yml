@@ -7,8 +7,6 @@ services:
     volumes:
       - ./data:/app/data
     environment:
-      - FLASK_APP=${FLASK_APP}
-      - FLASK_RUN_HOST=${FLASK_RUN_HOST}
       - DATABASE_URL=sqlite:///quickquid.db
     networks:
       - mynetworkpy
