@@ -5,18 +5,11 @@ from sqlalchemy import Enum, DateTime
 from datetime import datetime
 from sqlalchemy.orm import joinedload
 from flask_cors import CORS
-from dotenv import load_dotenv
-
-env = os.getenv('FLASK_ENV', 'development')
-load_dotenv(f'config/.env.{env}') 
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///quickquid.db'  
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
 db = SQLAlchemy(app)
-
-print(f"Running in {os.getenv('FLASK_ENV')} mode")
-print(os.getenv('ORIGINS'))
 
 origins = os.getenv('ORIGINS', 'http://localhost:4200').split(',')
 
@@ -341,4 +334,4 @@ with app.app_context():
     db.create_all()
 
 if __name__ == '__main__':
-    app.run(debug=os.getenv('DEBUG'), port=8080)
+    app.run(host='localhost', port=8080, debug=True)
