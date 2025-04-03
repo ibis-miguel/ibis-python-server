@@ -6,3 +6,5 @@ pip install -r requirements.txt
 
 flask run => run in production
 python app.py => run in development
+
+Er zit al data in de database. 001, 002
