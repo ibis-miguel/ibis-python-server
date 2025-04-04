@@ -7,11 +7,12 @@ from sqlalchemy.orm import joinedload
 from flask_cors import CORS
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///quickquid.db'  
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL') 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
 db = SQLAlchemy(app)
+flask_env = os.getenv('FLASK_ENV', 'development')
 
-origins = os.getenv('ORIGINS', 'http://localhost:4200').split(',')
+origins = os.getenv('ORIGINS' , 'http://localhost:4200').split(',')
 
 CORS(app, 
      origins=origins, 

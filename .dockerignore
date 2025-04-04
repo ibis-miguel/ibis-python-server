@@ -1,1 +1,25 @@
-config/.env.*
+.flaskenv
+
+# Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+env/
+
+# Git and version control
+.git/
+
+# Docker files
+.dockerignore
+docker-compose.override.yml
+
+# IDE/editor specific
+.vscode/
+.idea/
+
+# Python packaging
+*.egg-info/

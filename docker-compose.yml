@@ -3,11 +3,11 @@ services:
     build:
       context: .
     ports:
-      - "8080:8080"
+      - "${FLASK_RUN_PORT}:${FLASK_RUN_PORT}"
     volumes:
       - ./data:/app/data
     environment:
-      - DATABASE_URL=sqlite:///quickquid.db
+      - DATABASE_URL=${DATABASE_URL}
     networks:
       - mynetworkpy
 
@@ -17,7 +17,7 @@ services:
       dockerfile: Dockerfile
     container_name: angular-frontend-python
     ports:
-      - "4200:80"
+      - "${PORT_1}:${PORT_2}"
     depends_on:
       - app
     networks:

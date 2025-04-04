@@ -1,6 +1,12 @@
 FLASK_APP=app.py
-FLASK_ENV=production
+
+# FLASK_ENV=production
+# ORIGINS=http://64.225.62.232:4200
+
 DEBUG=False
-ORIGINS=http://64.225.62.232:4200
 FLASK_RUN_HOST=0.0.0.0
 FLASK_RUN_PORT=8080
+DATABASE_URL=sqlite:///quickquid.db
+
+PORT_1=4200
+PORT_2=80

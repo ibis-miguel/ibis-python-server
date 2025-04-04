@@ -1,0 +1,34 @@
+.flaskenv
+
+# Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+env/
+
+# IDE/editor specific
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Mac/Windows specific
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
+
+# Python packaging
+*.egg-info/
+
+# Testing
+.tox/
+.nox/
+
+# Docker files (optional, if you use overrides)
+docker-compose.override.yml
