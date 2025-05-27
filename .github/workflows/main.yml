@@ -1,1 +1,24 @@
+name: Sync GitHub master → GitLab develop
 
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  sync-to-gitlab:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout GitHub repository
+        uses: actions/checkout@v3
+
+      - name: Set Git identity
+        run: |
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
+
+      - name: Add GitLab remote and push master → develop
+        run: |
+          git remote add gitlab https://gitlab-ci-token:${{ secrets.GITLAB_TOKEN }}@gitlab.com/<GITLAB_NAMESPACE>/<GITLAB_REPO>.git
+          git push gitlab master:develop --force
