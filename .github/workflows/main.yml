@@ -18,7 +18,7 @@ jobs:
           git config --global user.name "GitHub Action"
           git config --global user.email "action@github.com"
 
-      - name: Add GitLab remote and push master → develop
+      - name: Add GitLab remote
         run: |
-          git remote add gitlab https://gitlab-ci-token:${{ secrets.GITLAB_TOKEN }}@gitlab.com/<GITLAB_NAMESPACE>/<GITLAB_REPO>.git
+          git remote add gitlab https://gitlab.com/${GITLAB_NAMESPACE}/${GITLAB_REPO}.git
           git push gitlab master:develop --force
