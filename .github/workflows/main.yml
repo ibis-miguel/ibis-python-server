@@ -24,5 +24,6 @@ jobs:
 
       - name: Add GitLab remote
         run: |
-          git remote add gitlab https://gitlab.com/${GITLAB_NAMESPACE}/${GITLAB_REPO}.git
+          git remote add gitlab https://oauth2:${GITLAB_TOKEN}@gitlab.com/${GITLAB_NAMESPACE}/${GITLAB_REPO}.git
           git push gitlab master:develop --force
+
